@@ -76,12 +76,10 @@ function Functions:DoSkills(RepeatCount)
     for i, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         for i = 0,RepeatCount do
             task.spawn(function()
-                for i = 0,RepeatCount do
-                    if v:FindFirstChild("cooldown") and (v:FindFirstChild("abilityEvent") or v:FindFirstChild("spellEvent")) then
-                        (v:FindFirstChild("abilityEvent") or v:FindFirstChild("spellEvent")):FireServer()
-                    elseif v:FindFirstChild("cooldown") then
-                        game:GetService("ReplicatedStorage"):WaitForChild("dataRemoteEvent"):FireServer({[1] = {["\t"] = v},[2] = RemoteCodes["Abilities"]})
-                    end
+                if v:FindFirstChild("cooldown") and (v:FindFirstChild("abilityEvent") or v:FindFirstChild("spellEvent")) then
+                    (v:FindFirstChild("abilityEvent") or v:FindFirstChild("spellEvent")):FireServer()
+                elseif v:FindFirstChild("cooldown") then
+                    game:GetService("ReplicatedStorage"):WaitForChild("dataRemoteEvent"):FireServer({[1] = {["\t"] = v},[2] = RemoteCodes["Abilities"]})
                 end
             end)
         end
@@ -93,13 +91,13 @@ function Functions:Teleport(Cframe)
     if not Character:FindFirstChild("HumanoidRootPart") then return end
     LastplayerPos = Character:GetPivot().p
     if WaitingToTp == true then return end
-    local bodyPosition = Character.HumanoidRootPart:FindFirstAncestorOfClass("BodyPosition")
-    local bodyGyro = Character.HumanoidRootPart:FindFirstAncestorOfClass("BodyGyro")
-    if not Character.HumanoidRootPart:FindFirstAncestorOfClass("BodyGyro") then
+    local bodyPosition = Character.HumanoidRootPart:FindFirstChildOfClass("BodyPosition")
+    local bodyGyro = Character.HumanoidRootPart:FindFirstChildOfClass("BodyGyro")
+    if not Character.HumanoidRootPart:FindFirstChildOfClass("BodyGyro") then
         bodyGyro = Instance.new("BodyGyro")
-        bodyGyro.MaxTorque = Vector3.new(400000, 400000, 400000);bodyGyro.CFrame = Character.HumanoidRootPart.CFrame;bodyGyro.D = 250;bodyGyro.Parent = Character.HumanoidRootPart
+        bodyGyro.MaxTorque = Vector3.new(400000, 400000, 400000);bodyGyro.CFrame = Character.HumanoidRootPart.CFrame;bodyGyro.D = 500;bodyGyro.Parent = Character.HumanoidRootPart
     end
-    if not Character.HumanoidRootPart:FindFirstAncestorOfClass("BodyPosition") then
+    if not Character.HumanoidRootPart:FindFirstChildOfClass("BodyPosition") then
         bodyPosition = Instance.new("BodyPosition")
         bodyPosition.MaxForce = Vector3.new(400000, 400000, 400000);bodyPosition.Position = Cframe.Position;bodyPosition.D = 300;bodyPosition.Parent = Character.HumanoidRootPart;Character.HumanoidRootPart.Velocity = Vector3.zero
     end
@@ -108,7 +106,7 @@ function Functions:Teleport(Cframe)
     Character.HumanoidRootPart.Anchored = false
     repeat task.wait()
         if Character:FindFirstChild("HumanoidRootPart") and bodyPosition ~= nil and bodyGyro ~= nil then
-            Character:PivotTo(Cframe + Vector3.new(0, Settings.AutoFarm.Distance * 2, 0))
+            Character:PivotTo(CFrame.new(Cframe.p + Vector3.new(0, Settings.AutoFarm.Distance * 2, 0))* CFrame.Angles(math.rad(90), 0, 0))
             bodyPosition.Position = Cframe.Position + Vector3.new(0, Settings.AutoFarm.Distance * 2, 0)
             bodyGyro.CFrame = CFrame.new(Character:GetPivot().p, Cframe.Position) * CFrame.Angles(math.rad(90), 0, 0)
         end
@@ -116,7 +114,7 @@ function Functions:Teleport(Cframe)
     WaitingToTp = false
     if Character:FindFirstChild("HumanoidRootPart") then
         Character.HumanoidRootPart.Anchored = true
-        bodyPosition:Destroy();bodyGyro:Destroy()
+        bodyPosition:Destroy()
     end
 end
 function Functions:GetEnemys()
@@ -523,7 +521,7 @@ end)
 Library:Notify({Title="Loaded";Text=string.format('Loaded In '..(tick()-oldTick));Duration=5})
 
 if queue_on_teleport ~= nil then
-    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/IJustFloat/Script/refs/heads/main/DungeonQuest/Main.lua"))()')
+    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/VertigoCool99/Script/refs/heads/main/Dungeon%20Quest/Ui.lua"))()')
 end
 
 repeat task.wait() until Character:FindFirstChild("HumanoidRootPart") and Players.LocalPlayer.PlayerGui and Players.LocalPlayer.PlayerGui:FindFirstChild("HUD") and Players.LocalPlayer.PlayerGui.HUD:FindFirstChild("Main") and Players.LocalPlayer.PlayerGui.HUD.Main:FindFirstChild("PlayerStatus") and Players.LocalPlayer.PlayerGui and Players.LocalPlayer.PlayerGui.HUD.Main.PlayerStatus:FindFirstChild("PlayerStatus") and Players.LocalPlayer.PlayerGui.HUD.Main.PlayerStatus.PlayerStatus:FindFirstChild("PlayerName")
