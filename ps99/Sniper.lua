@@ -1,6 +1,6 @@
 local item = "Cannon Corruption"
 local class = "Consumable"
-local maxPrice = "800000"
+local maxPrice = "850000"
 local maxBuyItem = 100
 local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8yOFqmpXAQz_AVdOuE4pkZQqwEenkRD-1rrF449TuPxs-PgkZ2NkSKYJ0UYYG8N"
 
@@ -102,7 +102,7 @@ if isfile("PetSim99Sniper.Snipe") then
                             local PurchaseTable = nil
                             if Quantity < maxBuyItem then
                                 PurchaseTable = {[UID] = Quantity}
-                                local PurchaseRemote = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(SearchInfo.UserId, PurchaseTable)
+                                local PurchaseRemote = Library.Invoke("Booths_RequestPurchase",SearchInfo.UserId, PurchaseTable)
                                 if PurchaseRemote == true then
                                     Webhook({
                                         Quantity=Quantity,
@@ -113,7 +113,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                 end
                             elseif Quantity >= maxBuyItem then
                                 PurchaseTable = {[UID] = maxBuyItem}
-                                local PurchaseRemote = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(SearchInfo.UserId, PurchaseTable)
+                                local PurchaseRemote = Library.Invoke("Booths_RequestPurchase",SearchInfo.UserId, PurchaseTable)
                                 if PurchaseRemote == true then
                                     Webhook({
                                         Quantity=maxBuyItem,
