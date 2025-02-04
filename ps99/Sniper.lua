@@ -136,7 +136,7 @@ if isfile("PetSim99Sniper.Snipe") then
         SearchItem()
     end
     --
-    local SearchRemote = game:GetService("ReplicatedStorage").Network.TradingTerminal_Search:InvokeServer(class, "{\"id\":\""..item.."\"}", nil, false)
+    local SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
     if SearchRemote ~= nil then
         local SearchInfo = {
             UserId = SearchRemote["user_id"],
