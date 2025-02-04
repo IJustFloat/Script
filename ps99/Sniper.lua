@@ -28,6 +28,7 @@ function UnAbbreviateNumber(Number)
     end
 end
 
+
 function Webhook(Info)
     local data = {
         ["content"] = "",
@@ -60,10 +61,12 @@ function Webhook(Info)
     request({Url=WebhookLink, Body=game:GetService("HttpService"):JSONEncode(data), Method="POST", Headers={["content-type"] = "application/json"}})   
 end
 
+local Library =  require(game:GetService("ReplicatedStorage").Library.Client.Network)
+
 function SearchItem()
     print("Started Searching")
     repeat task.wait(5)
-        local SearchRemote = game:GetService("ReplicatedStorage").Network.TradingTerminal_Search:InvokeServer(class, "{\"id\":\""..item.."\"}", nil, false)
+        local SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
         if SearchRemote ~= nil then
             local SearchInfo = {UserId = SearchRemote["user_id"],PlaceId = SearchRemote["place_id"],JobId = SearchRemote["job_id"],BoothNumber = SearchRemote["booth"],}
             writefile("PetSim99Sniper.Snipe",game:GetService("HttpService"):JSONEncode(SearchInfo))
