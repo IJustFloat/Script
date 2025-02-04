@@ -1,7 +1,7 @@
-local item = "Huge Dark Fox"
-local class = "Pet"
-local maxPrice = 25000000
-local maxBuyItem = 1
+local item = "Cannon Corruption"
+local class = "Consumable"
+local maxPrice = "800000"
+local maxBuyItem = 100
 local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8yOFqmpXAQz_AVdOuE4pkZQqwEenkRD-1rrF449TuPxs-PgkZ2NkSKYJ0UYYG8N"
 
 --Classes can be found here - require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
