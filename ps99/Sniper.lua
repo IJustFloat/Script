@@ -106,6 +106,7 @@ if queue_on_teleport ~= nil then
     queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/IJustFloat/Script/refs/heads/main/ps99/Sniper.lua"))()')
 end
 
+repeat task.wait() until Character ~= nil
 
 if isfile("PetSim99Sniper.Snipe") then
     --Purchase Item First
