@@ -6,7 +6,7 @@ local Character
 
 --Classes can be found here - require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
 
-repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer:GetAttribute("__LOADED") == true
+repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer:GetAttribute("__INIT") == true
 
 function UnAbbreviateNumber(Number)
     if string.find(Number,".") then
