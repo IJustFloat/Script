@@ -2,10 +2,11 @@ local item = "Tech Spinny Wheel Ticket"
 local maxPrice = "3200"
 local maxBuyItem = 1000
 local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8yOFqmpXAQz_AVdOuE4pkZQqwEenkRD-1rrF449TuPxs-PgkZ2NkSKYJ0UYYG8N"
+local Character
 
 --Classes can be found here - require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
 
-repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer:GetAttribute("__INIT") == true
+repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer:GetAttribute("__LOADED") == true
 
 function UnAbbreviateNumber(Number)
     if string.find(Number,".") then
@@ -37,6 +38,10 @@ function GetItemClass(Item)
         end
     end
 end
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    Character = character
+end)
 
 function Webhook(Info)
     local data = {
@@ -104,7 +109,7 @@ if isfile("PetSim99Sniper.Snipe") then
     end
     for i,v in pairs(game:GetService("Workspace").__THINGS.Booths:GetChildren()) do
         if v:GetAttribute("Owner") == SearchInfo.UserId then
-            game.Players.LocalPlayer.Character:PivotTo(v.Booth.CFrame * CFrame.new(0,0,-8))
+            Character:PivotTo(v.Booth.CFrame * CFrame.new(0,0,-8))
             Booth = v
         end
     end
