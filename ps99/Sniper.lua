@@ -102,10 +102,6 @@ function SearchItem()
     until test == true
 end
 
-if queue_on_teleport ~= nil then
-    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/IJustFloat/Script/refs/heads/main/ps99/Sniper.lua"))()')
-end
-
 if isfile("PetSim99Sniper.Snipe") then
     --Purchase Item First
     local SearchInfo = game:GetService("HttpService"):JSONDecode(readfile("PetSim99Sniper.Snipe"))
@@ -215,4 +211,8 @@ if isfile("PetSim99Sniper.Snipe") then
     end
 else
     SearchItem()
+end
+
+if queue_on_teleport ~= nil then
+    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/IJustFloat/Script/refs/heads/main/ps99/Sniper.lua"))()')
 end
