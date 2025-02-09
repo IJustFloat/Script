@@ -133,7 +133,10 @@ if isfile("PetSim99Sniper.Snipe") then
                         delfile("PetSim99Sniper.Snipe")
                     else
                         print("Item already gone!")
-                        delfile("PetSim99Sniper.Snipe")
+                        if isfile("PetSim99Sniper.Snipe") then
+                            delfile("PetSim99Sniper.Snipe") 
+                        end
+                        SearchItem()
                     end
                 end
             else
