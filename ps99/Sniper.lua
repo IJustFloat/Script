@@ -42,6 +42,7 @@ end
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
     Character = character
 end)
+Character = game.Players.LocalPlayer.Character
 
 function Webhook(Info)
     local data = {
