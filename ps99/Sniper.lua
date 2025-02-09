@@ -1,5 +1,4 @@
 local item = "Tech Spinny Wheel Ticket"
-local class = "Misc"
 local maxPrice = "3200"
 local maxBuyItem = 1000
 local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8yOFqmpXAQz_AVdOuE4pkZQqwEenkRD-1rrF449TuPxs-PgkZ2NkSKYJ0UYYG8N"
@@ -28,6 +27,16 @@ function UnAbbreviateNumber(Number)
     end
 end
 
+function GetItemClass(Item)
+    local Types = require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
+    for i,v in pairs(Types) do
+        for i2,v2 in pairs(v.Directory) do
+            if Item == i2 then 
+                return i
+            end
+        end
+    end
+end
 
 function Webhook(Info)
     local data = {
@@ -73,9 +82,9 @@ function SearchItem()
     repeat task.wait(5)
         local SearchRemote
         if class == "Consumbale" then
-            SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+            SearchRemote = Library.Invoke("TradingTerminal_Search",GetItemClass(item),"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
         else
-            SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\"}", nil, false)
+            SearchRemote = Library.Invoke("TradingTerminal_Search",GetItemClass(item),"{\"id\":\""..item.."\"}", nil, false)
         end
         if SearchRemote ~= nil then
             local SearchInfo = {UserId = SearchRemote["user_id"],PlaceId = SearchRemote["place_id"],JobId = SearchRemote["job_id"],BoothNumber = SearchRemote["booth"],}
@@ -177,9 +186,9 @@ if isfile("PetSim99Sniper.Snipe") then
     --
     local SearchRemote
     if class == "Consumbale" then
-        SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+        SearchRemote = Library.Invoke("TradingTerminal_Search",GetItemClass(item),"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
     else
-        SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\"}", nil, false)
+        SearchRemote = Library.Invoke("TradingTerminal_Search",GetItemClass(item),"{\"id\":\""..item.."\"}", nil, false)
     end
     if SearchRemote ~= nil then
         local SearchInfo = {
