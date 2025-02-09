@@ -129,7 +129,10 @@ if isfile("PetSim99Sniper.Snipe") then
                                 end
                             end
                         end
-                        print("Not Buying That Shit")
+                        print("Itme to pricey!")
+                        delfile("PetSim99Sniper.Snipe")
+                    else
+                        print("Item already gone!")
                         delfile("PetSim99Sniper.Snipe")
                     end
                 end
