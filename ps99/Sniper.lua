@@ -5,7 +5,7 @@ local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8
 
 --Classes can be found here - require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
 
-repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer:GetAttribute("__LOADED") == true
+repeat task.wait() until game:IsLoaded()
 
 function UnAbbreviateNumber(Number)
     if string.find(Number,".") then
