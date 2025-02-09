@@ -130,8 +130,8 @@ if isfile("PetSim99Sniper.Snipe") then
                     if v:IsA("Frame") and v:FindFirstChild("Holder") and v.Holder.ItemSlot.Icon.Image == tostring(ClassMod.Types[GetItemClass(item)].Directory[item].Icon) and tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2]) > 0 then
                         UID = v.Name
                         Quantity = tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2])
-                        OverallPrice = Quantity * Price
                         Price = UnAbbreviateNumber(v.Buy.Cost.Text)
+                        OverallPrice = Quantity * Price
                         if Price <= tonumber(maxPrice) then
                             local PurchaseTable = nil
                             if Quantity < maxBuyItem then
