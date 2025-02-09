@@ -118,10 +118,10 @@ if isfile("PetSim99Sniper.Snipe") then
     end
     if Booth ~= nil then
         local ClassMod = require(game:GetService("ReplicatedStorage").Library.Items.Types)
-        if ClassMod.Types[class] and ClassMod.Types[class].Directory[item] then
+        if GetItemClass(item) then
             if #Booth.Pets.BoothTop.PetScroll:GetChildren() > 0 then
                 for i,v in pairs(Booth.Pets.BoothTop.PetScroll:GetChildren()) do
-                    if v:IsA("Frame") and v:FindFirstChild("Holder") and v.Holder.ItemSlot.Icon.Image == tostring(ClassMod.Types[class].Directory[item].Icon) and tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2]) > 0 then
+                    if v:IsA("Frame") and v:FindFirstChild("Holder") and v.Holder.ItemSlot.Icon.Image == tostring(ClassMod.Types[GetItemClass(item)].Directory[item].Icon) and tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2]) > 0 then
                         UID = v.Name
                         Quantity = tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2])
                         OverallPrice = Quantity * Price
@@ -136,7 +136,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                         Quantity=Quantity,
                                         Price=Price,
                                         OverallPrice=OverallPrice,
-                                        ItemName=ClassMod.Types[class].Directory[item].DisplayName,
+                                        ItemName=ClassMod.Types[GetItemClass(item)].Directory[item].DisplayName,
                                         BoothSellerName=tostring(User),
                                     })
                                 end
@@ -151,7 +151,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                             Quantity = affordableQuantity,
                                             Price = Price,
                                             OverallPrice = affordableQuantity * Price,
-                                            ItemName = ClassMod.Types[class].Directory[item].DisplayName,
+                                            ItemName = ClassMod.Types[GetItemClass(item)].Directory[item].DisplayName,
                                             BoothSellerName = tostring(User),
                                         })
                                         print("Purchased as many as we could afford!")
@@ -167,7 +167,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                         Quantity=maxBuyItem,
                                         Price=Price,
                                         OverallPrice=OverallPrice,
-                                        ItemName=ClassMod.Types[class].Directory[item].DisplayName,
+                                        ItemName=ClassMod.Types[GetItemClass(item)].Directory[item].DisplayName,
                                         BoothSellerName=tostring(User),
                                     })
                                 end
