@@ -1,7 +1,7 @@
-local item = "Cannon Corruption"
-local class = "Consumable"
-local maxPrice = "850000"
-local maxBuyItem = 100
+local item = "Tech Spinny Wheel Ticket"
+local class = "Misc"
+local maxPrice = "3200"
+local maxBuyItem = 1000
 local WebhookLink = "https://discord.com/api/webhooks/1200490379296911370/rSb6R8yOFqmpXAQz_AVdOuE4pkZQqwEenkRD-1rrF449TuPxs-PgkZ2NkSKYJ0UYYG8N"
 
 --Classes can be found here - require(game:GetService("ReplicatedStorage").Library.Items.Types).Types
@@ -66,7 +66,12 @@ local Library =  require(game:GetService("ReplicatedStorage").Library.Client.Net
 function SearchItem()
     print("Started Searching")
     repeat task.wait(5)
-        local SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+        local SearchRemote
+        if class == "Consumbale" then
+            SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+        else
+            SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\"}", nil, false)
+        end
         if SearchRemote ~= nil then
             local SearchInfo = {UserId = SearchRemote["user_id"],PlaceId = SearchRemote["place_id"],JobId = SearchRemote["job_id"],BoothNumber = SearchRemote["booth"],}
             writefile("PetSim99Sniper.Snipe",game:GetService("HttpService"):JSONEncode(SearchInfo))
@@ -136,7 +141,12 @@ if isfile("PetSim99Sniper.Snipe") then
         SearchItem()
     end
     --
-    local SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+    local SearchRemote
+    if class == "Consumbale" then
+        SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\",\"tn\":1}", nil, false)
+    else
+        SearchRemote = Library.Invoke("TradingTerminal_Search",class,"{\"id\":\""..item.."\"}", nil, false)
+    end
     if SearchRemote ~= nil then
         local SearchInfo = {
             UserId = SearchRemote["user_id"],
