@@ -47,6 +47,11 @@ function Webhook(Info)
                     ["inline"] = true
                 },
                 {
+                    ["name"] = "Overall Price:",
+                    ["value"] = "```"..Info.OverallPrice.."```",
+                    ["inline"] = true
+                },
+                {
                     ["name"] = "Quantity:",
                     ["value"] = "```"..Info.Quantity.."```",
                     ["inline"] = true
@@ -102,6 +107,7 @@ if isfile("PetSim99Sniper.Snipe") then
                     if v:IsA("Frame") and v:FindFirstChild("Holder") and v.Holder.ItemSlot.Icon.Image == tostring(ClassMod.Types[class].Directory[item].Icon) and tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2]) > 0 then
                         UID = v.Name
                         Quantity = tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2])
+                        OverallPrice = Quantity * Price
                         Price = UnAbbreviateNumber(v.Buy.Cost.Text)
                         if Price <= tonumber(maxPrice) then
                             local PurchaseTable = nil
@@ -112,6 +118,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                     Webhook({
                                         Quantity=Quantity,
                                         Price=Price,
+                                        OverallPrice=OverallPrice,
                                         ItemName=ClassMod.Types[class].Directory[item].DisplayName,
                                         BoothSellerName=tostring(User),
                                     })
@@ -123,6 +130,7 @@ if isfile("PetSim99Sniper.Snipe") then
                                     Webhook({
                                         Quantity=maxBuyItem,
                                         Price=Price,
+                                        OverallPrice=OverallPrice,
                                         ItemName=ClassMod.Types[class].Directory[item].DisplayName,
                                         BoothSellerName=tostring(User),
                                     })
