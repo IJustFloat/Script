@@ -123,6 +123,25 @@ if isfile("PetSim99Sniper.Snipe") then
                                         BoothSellerName=tostring(User),
                                     })
                                 end
+                            elseif OverallPrice > game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value then
+                                local maxAffordableQuantity = math.floor(game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value / Price)
+                                if maxAffordableQuantity > 0 then
+                                    local affordableQuantity = math.min(maxAffordableQuantity, Quantity)
+                                    PurchaseTable = {[UID] = affordableQuantity}
+                                    local PurchaseRemote = Library.Invoke("Booths_RequestPurchase", SearchInfo.UserId, PurchaseTable)
+                                    if PurchaseRemote == true then
+                                        Webhook({
+                                            Quantity = affordableQuantity,
+                                            Price = Price,
+                                            OverallPrice = affordableQuantity * Price,
+                                            ItemName = ClassMod.Types[class].Directory[item].DisplayName,
+                                            BoothSellerName = tostring(User),
+                                        })
+                                        print("Purchased as many as we could afford!")
+                                    end
+                                else
+                                    print("Not enough diamonds to purchase any items.")
+                                end
                             elseif Quantity >= maxBuyItem then
                                 PurchaseTable = {[UID] = maxBuyItem}
                                 local PurchaseRemote = Library.Invoke("Booths_RequestPurchase",SearchInfo.UserId, PurchaseTable)
