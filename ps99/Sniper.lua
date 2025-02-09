@@ -103,7 +103,7 @@ if isfile("PetSim99Sniper.Snipe") then
                         UID = v.Name
                         Quantity = tonumber(string.split(v.Holder.ItemSlot.Quantity.Text,"x")[2])
                         Price = UnAbbreviateNumber(v.Buy.Cost.Text)
-                        if Price <= maxPrice then
+                        if Price <= tonumber(maxPrice) then
                             local PurchaseTable = nil
                             if Quantity < maxBuyItem then
                                 PurchaseTable = {[UID] = Quantity}
@@ -128,16 +128,17 @@ if isfile("PetSim99Sniper.Snipe") then
                                     })
                                 end
                             end
+                            print("Purchased item!")
+                        else
+                            print("Itme to pricey!")
                         end
-                        print("Itme to pricey!")
                         delfile("PetSim99Sniper.Snipe")
-                    else
-                        print("Item already gone!")
-                        if isfile("PetSim99Sniper.Snipe") then
-                            delfile("PetSim99Sniper.Snipe") 
-                        end
-                        SearchItem()
                     end
+                end
+                if isfile("PetSim99Sniper.Snipe") then
+                    print("Item already gone!")
+                    delfile("PetSim99Sniper.Snipe")
+                    SearchItem()
                 end
             else
                 SearchItem()
